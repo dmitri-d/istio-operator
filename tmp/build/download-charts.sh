@@ -50,6 +50,8 @@ function retrieveIstioRelease() {
       cd "${RELEASES_DIR}"
       ${EXTRACT_CMD}
       mv istio-maistra-${MAISTRA_BRANCH}/install/kubernetes/helm/* ${RELEASE_DIR}
+      rm -rf ${RELEASE_DIR}/istio/charts/kiali/templates/*.yaml
+      rm -rf ${RELEASE_DIR}/istio/charts/kiali/templates/tests
       #(
       #  cd "${HELM_DIR}/istio"
       #  helm dep update

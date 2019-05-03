@@ -93,7 +93,8 @@ func (r *controlPlaneReconciler) processManifests(manifests []manifest.Manifest,
 				allErrors = append(allErrors, err)
 				continue
 			}
-			err = r.processObject(obj, resourcesProcessed, oldStatus, newStatus)
+			err = r.
+				processObject(obj, resourcesProcessed, oldStatus, newStatus)
 			if err != nil {
 				allErrors = append(allErrors, err)
 			}

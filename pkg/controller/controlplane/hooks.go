@@ -86,7 +86,7 @@ func (r *controlPlaneReconciler) processDeletedComponent(name string, status *is
 
 func (r *controlPlaneReconciler) patchObject(object *unstructured.Unstructured) error {
 	switch object.GetKind() {
-	case "ConfigMap":
+	case "Kiali":
 		if object.GetName() == "kiali" {
 			return r.patchKialiConfig(object)
 		}

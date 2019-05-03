@@ -273,7 +273,7 @@ function patchKialiTemplate() {
   echo "patching Kiali specific Helm charts"
 
   # - remove the kiali username/password secret
-  rm ${HELM_DIR}/istio/charts/kiali/templates/demosecret.yaml
+ rm ${HELM_DIR}/istio/charts/kiali/templates/demosecret.yaml
 }
 
 # The following modifications are made to the upstream kiali configuration for deployment on OpenShift
@@ -311,35 +311,10 @@ function patchKialiOpenShift() {
 \      private_key_file: /kiali-cert/tls.key
              }' ${HELM_DIR}/istio/charts/kiali/templates/configmap.yaml
 
-  # - Add the route.openshift.io api group to the cluster role
-  sed -i -e '/apiGroups:.*config.istio.io/ i\
-\- apiGroups: ["project.openshift.io"]\
-\  resources:\
-\  - projects\
-\  verbs:\
-\  - get\
-\- apiGroups: ["route.openshift.io"]\
-\  resources:\
-\  - routes\
-\  verbs:\
-\  - get\
-\- apiGroups: [""]\
-\  resources:\
-\  - routes\
-\  verbs:\
-\  - get\
-\- apiGroups: ["apps.openshift.io"]\
-\  resources:\
-\  - deploymentconfigs\
-\  verbs:\
-\  - get\
-\  - list\
-\  - watch' ${HELM_DIR}/istio/charts/kiali/templates/clusterrole.yaml
-
-  # - Add the openshift annotation to the service
-  sed -i -e '/metadata/ a\
-\  annotations:\
-\    service.alpha.openshift.io/serving-cert-secret-name: kiali-cert-secret' ${HELM_DIR}/istio/charts/kiali/templates/service.yaml
+#  # - Add the openshift annotation to the service
+#  sed -i -e '/metadata/ a\
+#\  annotations:\
+#\    service.alpha.openshift.io/serving-cert-secret-name: kiali-cert-secret' ${HELM_DIR}/istio/charts/kiali/templates/service.yaml
   
   # - Remove the prometheus, grafana environment from the deployment
   sed -i -e '/SERVER_CREDENTIALS_USERNAME/,/volumeMounts/ {
@@ -576,5 +551,5 @@ copyOverlay
 patchTemplates
 patchGrafanaTemplate
 patchTracingtemplate
-patchKialiTemplate
-patchKialiOpenShift
+#patchKialiTemplate
+#patchKialiOpenShift

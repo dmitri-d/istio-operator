@@ -872,6 +872,8 @@ type KialiConfig struct {
 	Dashboard   *KialiDashboardConfig `json:"dashboard,omitempty"`
 	// PrometheusAddr for prometheus service
 	PrometheusAddr string `json:"prometheusAddr,omitempty"`
+	GrafanaAddr string `json:"grafanaAddr,omitempty"`
+	JaegerAddr string `json:"jaegerAddr,omitempty"`
 	// CreateDemoSecret will cause a secret will be created with a default username
 	// and password. Useful for demos.
 	CreateDemoSecret *bool `json:"createDemoSecret,omitempty"`
